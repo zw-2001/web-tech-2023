@@ -32,6 +32,6 @@ spring:
       hibernate.jdbc.time_zone: UTC
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgres://buadnavc:raUC-bgSHjQcFcOoZ2QDnBkKoM7w6IYK@dumbo.db.elephantsql.com/buadnavc
+    url: jdbc:postgresql://dumbo.db.elephantsql.com/buadnavc
     username: buadnavc
     password: raUC-bgSHjQcFcOoZ2QDnBkKoM7w6IYK
