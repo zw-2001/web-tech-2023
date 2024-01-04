@@ -16,4 +16,9 @@ public class VisiteController {
     public String findStockBySymbol(@PathVariable String symbol) {
         return "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + apiKey;
     }
+
+    @GetMapping("/list-sp500-company")
+    public String listSp500Company() {
+        return "https://raw.github.com/datasets/s-and-p-500-companies/main/data/constituents.csv";
+    }
 }
