@@ -18,10 +18,10 @@ import java.util.UUID;
 public class VisiteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
-    private UUID id;
-    @Column(name = "Symbole")
-    private String Symbole;
-    @Column(name="Timestamp")
+    @Column(name = "ID")
+    private UUID ID;
+    @Column(name = "symbol")
+    private String symbol;
+    @Column(name="timestamp")
     private LocalDateTime timestamp;
 }

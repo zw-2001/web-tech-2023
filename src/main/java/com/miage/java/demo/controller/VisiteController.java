@@ -1,8 +1,7 @@
 package com.miage.java.demo.controller;
 
+import com.miage.java.demo.entity.VisiteEntity;
 import com.miage.java.demo.service.VisiteService;
-import lombok.AllArgsConstructor;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/visite")
@@ -22,10 +22,16 @@ public class VisiteController {
     @Autowired
     private VisiteService visiteService;
 
-    /*
-    * TODO
-    *  insert a row into View table when /get-stock-price/{symbol} was called
-    * */
+    @PostMapping("/get-stock-price/{symbol}")
+    public VisiteEntity getStockPrice(@PathVariable String symbol) {
+        LocalDateTime timestamp = LocalDateTime.now();
+        VisiteEntity visiteEntity = VisiteEntity.builder()
+                .symbol(symbol)
+                .timestamp(timestamp)
+                .build();
+        return visiteService.saveVisite(visiteEntity);
+    }
+
     @GetMapping("/daily-price/{symbol}")
     public ResponseEntity<String> findStockBySymbol(@PathVariable String symbol) {
         String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + apiKey;
