@@ -2,11 +2,13 @@ package com.miage.java.demo.domain;
 
 import lombok.Builder;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 
 @Builder
 public record Visite (
-        Integer ID,
-        String Symbole,
-        Timestamp Timestamp) {
+        UUID ID,
+        String symbol,
+        LocalDateTime timestamp) {
 }

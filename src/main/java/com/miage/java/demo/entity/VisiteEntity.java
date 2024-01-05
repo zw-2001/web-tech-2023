@@ -6,20 +6,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
-@Table(name = "visite")
+@Table(name = "visite_v2")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class VisiteEntity {
     @Id
-    private Integer ID;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
+    private UUID id;
     @Column(name = "Symbole")
     private String Symbole;
-    @Column(name="Timestamp", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private String Timestamp;
+    @Column(name="Timestamp")
+    private LocalDateTime timestamp;
 }
