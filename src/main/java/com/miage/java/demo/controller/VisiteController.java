@@ -22,20 +22,16 @@ public class VisiteController {
     @Autowired
     private VisiteService visiteService;
 
-    @PostMapping("/get-stock-price/{symbol}")
-    public VisiteEntity getStockPrice(@PathVariable String symbol) {
+    @GetMapping("/daily-price/{symbol}")
+    public ResponseEntity<String> findStockBySymbol(@PathVariable String symbol) {
+        String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + apiKey;
+        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
         LocalDateTime timestamp = LocalDateTime.now();
         VisiteEntity visiteEntity = VisiteEntity.builder()
                 .symbol(symbol)
                 .timestamp(timestamp)
                 .build();
-        return visiteService.saveVisite(visiteEntity);
-    }
-
-    @GetMapping("/daily-price/{symbol}")
-    public ResponseEntity<String> findStockBySymbol(@PathVariable String symbol) {
-        String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + apiKey;
-        ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
+        visiteService.saveVisite(visiteEntity);
         return response;
     }
 
