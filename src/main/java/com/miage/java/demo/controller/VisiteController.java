@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/visite")
 public class VisiteController {
 
     public static RestTemplate restTemplate = new RestTemplate();
-    private String apiKey = "KXG4L563UAPZLZ2X";
+    private String apiKey = "5VBP2LU6D9J4P3NT";
     @Autowired
     private VisiteService visiteService;
 
@@ -47,9 +48,9 @@ public class VisiteController {
         ResponseEntity<String> response = restTemplate.getForEntity(apiUrl, String.class);
         return response;
     }
-    /*
-     * TODO
-     *  an endpoint that returns the most frequently view symbol in View table (the symbol that was called the most)
-     *  in the date, week, month, year
-     * */
+
+    @GetMapping("/most-frequently-view/{timestamp}")
+    public List<Object> getMostFrequentlyViewByDate(@PathVariable String timestamp) {
+        return visiteService.getMostFrequentlyViewByDate(timestamp);
+    }
 }
