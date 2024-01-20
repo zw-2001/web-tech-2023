@@ -1,14 +1,14 @@
 package com.miage.java.demo.entity;
 
-import org.assertj.core.api.Assertions;
-import org.mockito.Mock;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class VisiteEntityTest {
-    @org.junit.Test
+    @Test
     public void testVisiteEntity() {
         // given
         UUID id = UUID.randomUUID();
@@ -19,13 +19,13 @@ public class VisiteEntityTest {
         VisiteEntity visiteEntity = new VisiteEntity(id, symbol, timestamp);
 
         // then
-        Assertions.assertThat(visiteEntity).isNotNull();
-        Assertions.assertThat(visiteEntity.getID()).isEqualTo(id);
-        Assertions.assertThat(visiteEntity.getSymbol()).isEqualTo(symbol);
-        Assertions.assertThat(visiteEntity.getTimestamp()).isEqualTo(timestamp);
+        assertNotNull(visiteEntity);
+        assertEquals(visiteEntity.getID(), id);
+        assertEquals(visiteEntity.getSymbol(), symbol);
+        assertEquals(visiteEntity.getTimestamp(), timestamp);
     }
 
-    @org.junit.Test
+    @Test
     public void testVisiteEntityEquality() {
         // given
         UUID id = UUID.randomUUID();
@@ -35,11 +35,11 @@ public class VisiteEntityTest {
         VisiteEntity visiteEntity2 = new VisiteEntity(id, symbol, timestamp);
 
         // then
-        Assertions.assertThat(visiteEntity1).isEqualTo(visiteEntity2);
-        Assertions.assertThat(visiteEntity1.hashCode()).isEqualTo(visiteEntity2.hashCode());
+        assertEquals(visiteEntity1, visiteEntity2);
+        assertEquals(visiteEntity1.hashCode(), visiteEntity2.hashCode());
     }
 
-    @org.junit.Test
+    @Test
     public void testVisiteEntityToString() {
         // given
         UUID id = UUID.randomUUID();
@@ -48,16 +48,18 @@ public class VisiteEntityTest {
         VisiteEntity visiteEntity = new VisiteEntity(id, symbol, timestamp);
 
         // then
-        Assertions.assertThat(visiteEntity.toString()).contains(id.toString(), symbol, timestamp.toString());
+        assertTrue(visiteEntity.toString().contains(id.toString()));
+        assertTrue(visiteEntity.toString().contains(symbol));
+        assertTrue(visiteEntity.toString().contains(timestamp.toString()));
     }
 
-    @org.junit.Test
+    @Test
     public void testVisiteEntityJpaAnnotations() {
         // given
         VisiteEntity visiteEntity = Mockito.mock(VisiteEntity.class);
 
         // then
-        Assertions.assertThat(visiteEntity).isNotNull();
-        Assertions.assertThat(visiteEntity).isInstanceOf(VisiteEntity.class);
+        assertNotNull(visiteEntity);
+        assertTrue(visiteEntity instanceof VisiteEntity);
     }
 }

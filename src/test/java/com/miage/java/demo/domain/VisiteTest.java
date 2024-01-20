@@ -1,12 +1,14 @@
 package com.miage.java.demo.domain;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class VisiteTest {
-    @org.junit.Test
+    @Test
     public void testVisiteRecord() {
         // given
         UUID id = UUID.randomUUID();
@@ -17,13 +19,13 @@ public class VisiteTest {
         Visite visite = new Visite(id, symbol, timestamp);
 
         // then
-        Assertions.assertThat(visite).isNotNull();
-        Assertions.assertThat(visite.ID()).isEqualTo(id);
-        Assertions.assertThat(visite.symbol()).isEqualTo(symbol);
-        Assertions.assertThat(visite.timestamp()).isEqualTo(timestamp);
+        assertNotNull(visite);
+        assertEquals(visite.ID(),id);
+        assertEquals(visite.symbol(), symbol);
+        assertEquals(visite.timestamp(), timestamp);
     }
 
-    @org.junit.Test
+    @Test
     public void testVisiteRecordEquality() {
         // given
         UUID id = UUID.randomUUID();
@@ -33,11 +35,11 @@ public class VisiteTest {
         Visite visite2 = new Visite(id, symbol, timestamp);
 
         // then
-        Assertions.assertThat(visite1).isEqualTo(visite2);
-        Assertions.assertThat(visite1.hashCode()).isEqualTo(visite2.hashCode());
+        assertEquals(visite1, visite2);
+        assertEquals(visite1.hashCode(), visite2.hashCode());
     }
 
-    @org.junit.Test
+    @Test
     public void testVisiteRecordToString() {
         // given
         UUID id = UUID.randomUUID();
@@ -46,6 +48,8 @@ public class VisiteTest {
         Visite visite = new Visite(id, symbol, timestamp);
 
         // then
-        Assertions.assertThat(visite.toString()).contains(id.toString(), symbol, timestamp.toString());
+        assertTrue(visite.toString().contains(id.toString()));
+        assertTrue(visite.toString().contains(symbol));
+        assertTrue(visite.toString().contains(timestamp.toString()));
     }
 }
