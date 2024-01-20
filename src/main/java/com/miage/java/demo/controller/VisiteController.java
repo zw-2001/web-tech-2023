@@ -3,7 +3,6 @@ package com.miage.java.demo.controller;
 import com.miage.java.demo.entity.VisiteEntity;
 import com.miage.java.demo.service.VisiteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.ResponseEntity;
@@ -52,7 +51,7 @@ public class VisiteController {
     }
 
     @GetMapping("/most-frequently-view/{timestamp}")
-    public List<Object[]> getMostFrequentlyViewByDate(@PathVariable String timestamp) {
+    public List<Object> getMostFrequentlyViewByDate(@PathVariable String timestamp) {
         return visiteService.getMostFrequentlyViewByDate(timestamp);
     }
 }
