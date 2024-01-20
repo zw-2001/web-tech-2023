@@ -22,7 +22,7 @@ public class VisiteService {
         return visiteEntityRepository.save(visiteEntity);
     }
 
-    public List<Object> getMostFrequentlyViewByDate(String timestamp) {
+    public List<Object[]> getMostFrequentlyViewByDate(String timestamp) {
         return visiteEntityRepository.findByTimestamp(timestamp);
     }
 }

@@ -14,5 +14,5 @@ public interface VisiteEntityRepository extends JpaRepository<VisiteEntity, Inte
     @Query("SELECT visite.symbol, COUNT(visite.symbol) FROM VisiteEntity visite " +
             "WHERE FUNCTION('TO_CHAR', visite.timestamp, 'YYYY-MM-DD HH24:MI:SS') LIKE CONCAT('%', :timestamp, '%') " +
             "GROUP BY visite.symbol ORDER BY COUNT(visite.symbol) DESC")
-    public List<Object> findByTimestamp(@Param("timestamp") String timestamp);
+    public List<Object[]> findByTimestamp(@Param("timestamp") String timestamp);
 }

@@ -2,6 +2,8 @@ package com.miage.java.demo.controller;
 
 import com.miage.java.demo.entity.VisiteEntity;
 import com.miage.java.demo.service.VisiteService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +21,16 @@ import java.util.List;
 @RequestMapping("/visite")
 @CrossOrigin(origins = "http://localhost:4200")
 public class VisiteController {
-
-    public static RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    public static RestTemplate restTemplate;
     private String apiKey = "5VBP2LU6D9J4P3NT";
     @Autowired
     private VisiteService visiteService;
 
+    public VisiteController(VisiteService visiteService, RestTemplate restTemplate) {
+        this.visiteService = visiteService;
+        this.restTemplate = restTemplate;
+    }
     @GetMapping("/daily-price/{symbol}")
     public ResponseEntity<String> findStockBySymbol(@PathVariable String symbol) {
         String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + apiKey;

@@ -23,23 +23,22 @@ public class VisiteControllerTest {
     @InjectMocks
     private VisiteController visiteController;
 
+    private String apiKey = "5VBP2LU6D9J4P3NT";
     @Before
     public void setUp() {
         restTemplate = Mockito.mock(RestTemplate.class);
         visiteService = Mockito.mock(VisiteService.class);
-        visiteController = new VisiteController(restTemplate, visiteService);
+        visiteController = new VisiteController(visiteService, restTemplate);
     }
     @org.junit.Test
     public void should_get_daily_stock() {
         // given
-        String apiKey = "KXG4L563UAPZLZ2X";
         String symbol = "IBM";
-        ResponseEntity<String> mockResponse = ResponseEntity.ok("Mocked response");
         String apiUrl = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=" + symbol + "&apikey=" + apiKey;
-        ResponseEntity<String> response = ResponseEntity.ok("Mocked response");;
-        Mockito.when(restTemplate.getForEntity(apiUrl, String.class)).thenReturn(mockResponse);
+        ResponseEntity<String> response = ResponseEntity.ok("Mocked response");
+        Mockito.when(restTemplate.getForEntity(apiUrl, String.class)).thenReturn(response);
         // when
-        String res = visiteController.getOverview("IBM").toString();
+        String res = visiteController.getOverview("IBM" ).toString();
 
         // then
         Assertions.assertThat(res).isEqualTo(response.toString());
@@ -63,7 +62,7 @@ public class VisiteControllerTest {
     public void testFindStockBySymbol() {
         // given
         String symbol = "AAPL";
-        String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=KXG4L563UAPZLZ2X";
+        String apiUrl = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + symbol + "&apikey=" + apiKey;
         ResponseEntity<String> mockResponse = ResponseEntity.ok("Mocked response");
 
         Mockito.when(restTemplate.getForEntity(apiUrl, String.class)).thenReturn(mockResponse);
